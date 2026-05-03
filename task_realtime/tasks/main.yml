@@ -1,0 +1,19 @@
+# tasks file for task_realtime
+- name: Ec2 creation using loops
+  amazon.aws.ec2_instance:
+    name: "{{ item.name }}"
+    key_name: ansible_test_key
+    instance_type: t2.micro
+    security_group: default
+    region: us-east-1 
+    aws_access_key: "{{ ec2_access_key }}"
+    aws_secret_key: "{{ ec2_secret_key }}"
+    image_id: "{{ item.image }}"
+    network:
+      assign_public_ip: true
+    tags:
+      environment: "{{ item.name }}"
+  loop:
+    - { image: "ami-0ed094fb1304fd857", name: "Ec2_linux_node" }
+    - { image: "ami-091138d0f0d41ff90", name: "Ec2_ubuntu_node1" }
+    - { image: "ami-091138d0f0d41ff90", name: "Ec2_ubuntu_node2" }
