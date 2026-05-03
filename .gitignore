@@ -1,1 +1,3 @@
+# Ignore Ansible sensitive files
+group_vars/
 vault.pass
